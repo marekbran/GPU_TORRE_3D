@@ -84,8 +84,8 @@ def surface_integral(u_data, du_dt_data, p_1_data, p_2_data, p_3_data, t_data, t
 
 
 if __name__ == "__main__":
-    mat_data = scipy.io.loadmat('system_data_1.mat')
-    mat_data_full = scipy.io.loadmat('surface_integral.mat')
+    mat_data = scipy.io.loadmat('GPU_TORRE_3D\system_data_1.mat')
+    mat_data_full = scipy.io.loadmat('GPU_TORRE_3D\surface_integral.mat')
 
     source_points = mat_data['source_points']
     orbit_triangles = mat_data['orbit_triangles']

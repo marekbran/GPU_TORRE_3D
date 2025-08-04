@@ -16,10 +16,10 @@ import math
 
 
 if __name__ == "__main__":
-    mat_data = scipy.io.loadmat('system_data_1.mat')
-    mat_data_test = scipy.io.loadmat('system_data_1_test.mat')
-    mat_data_2 = scipy.io.loadmat('bounndary_point_source.mat')
-    mat_data_full = scipy.io.loadmat('BIGger_loop.mat')
+    mat_data = scipy.io.loadmat('GPU_TORRE_3D\system_data_1.mat')
+    mat_data_test = scipy.io.loadmat('GPU_TORRE_3D\system_data_1_test.mat')
+    mat_data_2 = scipy.io.loadmat('GPU_TORRE_3D\bounndary_point_source.mat')
+    mat_data_full = scipy.io.loadmat('GPU_TORRE_3D\BIGger_loop.mat')
 
 
     source_points = mat_data_2['source_points']
@@ -152,26 +152,7 @@ if __name__ == "__main__":
     end_time = time.time()
     print(f"Execution time: {end_time - start_time:.4f} seconds")
 
-    
-    r_1_data_norm = np.linalg.norm(r_1_data)
-    p_1_data_norm = np.linalg.norm(p_1_data - r_1_data)
-    p_1_data_only_norm = np.linalg.norm(p_1_data)
 
-    print(f"r_1_data_norm: {r_1_data_norm:.40f}")
-    print(f"p_1_data_norm: {p_1_data_norm:.40f}")
-    print(f"p_1_data_only_norm: {p_1_data_only_norm:.40f}")
-    print(p_1_data_norm / r_1_data_norm)
-    print("\n")
-
-    f_data_mat_norm = np.linalg.norm(f_data_mat - r_f_data)
-    f_data_mat_only_norm = np.linalg.norm(f_data_mat)
-    r_f_data_norm = np.linalg.norm(r_f_data)
-
-    print(f"f_data_mat_norm: {f_data_mat_norm:.40f}")
-    print(f"f_data_mat_only_norm: {f_data_mat_only_norm:.40f}")
-    print(f"r_f_data_norm: {r_f_data_norm:.40f}")
-    print(f_data_mat_norm / r_f_data_norm)
-    print("\n")
 
     
 

@@ -51,19 +51,4 @@ if __name__ == "__main__":
 
     x = pcg_iteration_gpu(A, b, tol_val, max_it, M, x, 3)
 
-    print(x.shape)
-    print(max_it)
-    print(tol_val)
-
-    #print(f"div_u with 10 decimal places: {conv_val:.40f}")
     
-    print(f"div_u with 10 decimal places: {x[0][0]:.40f}")
-    #print(conv_val)
-    print(n_iter)
-
-    same = np.array_equal(x, x_mat)
-    print(f"Are matrices same? {same}")
-
-    p_norm = np.linalg.norm(x - x_mat) 
-    p_mat_norm = np.linalg.norm(x_mat)
-    print(p_norm / p_mat_norm)

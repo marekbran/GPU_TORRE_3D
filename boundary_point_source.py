@@ -23,7 +23,7 @@ def boundary_point_source(source_points, orbit_triangles, orbit_nodes):
 
 
 if __name__ == "__main__":
-    mat_data = scipy.io.loadmat('bounndary_point_source.mat')
+    mat_data = scipy.io.loadmat('GPU_TORRE_3D\bounndary_point_source.mat')
     source_points = mat_data['source_points']
     orbit_triangles = mat_data['orbit_triangles']
     orbit_nodes = mat_data['orbit_nodes']

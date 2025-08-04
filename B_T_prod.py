@@ -105,7 +105,7 @@ def B_T_prod(p_1, p_2, p_3, div_vec, n, t, gpu_extended_memory):
 
 if __name__ == "__main__":
 
-    mat_data = scipy.io.loadmat('B_T_prod.mat')
+    mat_data = scipy.io.loadmat('GPU_TORRE_3D/B_T_prod.mat')
 
     n = mat_data['n_array_cpu']
     t = mat_data['t_array_cpu']
@@ -113,16 +113,6 @@ if __name__ == "__main__":
     p_2 = mat_data['p_2']
     p_3 = mat_data['p_3']
     div_vec = mat_data['div_vec']
-
-
-    """
-    print("n type:", type(n), "dtype:", n.dtype)
-    print("t type:", type(t), "dtype:", t.dtype)
-    print("p_1 type:", type(p_1), "dtype:", p_1.dtype)
-    print("p_2 type:", type(p_2), "dtype:", p_2.dtype)
-    print("p_3 type:", type(p_3), "dtype:", p_3.dtype)
-    print("div_vec type:", type(div_vec), "dtype:", div_vec.dtype)
-    """
 
 
 
@@ -135,15 +125,6 @@ if __name__ == "__main__":
     end_time = time.time()
 
 
-    p_only_norm = np.linalg.norm(p)
-    p_norm = np.linalg.norm(p - A) 
-    p_mat_norm = np.linalg.norm(A)
-
-    print(f"Norm of p - A: {p_norm:.40f}")
-    print(f"Norm of A: {p_mat_norm:.40f}")
-    print(f"Norm of p: {p_only_norm:.40f}")
-
-    print(p_norm / p_mat_norm)
     
 
 

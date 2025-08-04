@@ -3,7 +3,7 @@ import numpy as np
 import time
 import sys
 import scipy.io
-import os
+
 
 
 
@@ -94,7 +94,7 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
 
 
 if __name__ == "__main__":
-    mat_data = scipy.io.loadmat('gpu_torre_data.mat')
+    mat_data = scipy.io.loadmat('GPU_TORRE_3D\system_data_1.mat')
     n = mat_data['n_array_cpu']
     print(n.dtype)
     u = mat_data['u']
@@ -112,16 +112,7 @@ if __name__ == "__main__":
     start_time = time.time()
     p = B_prod(u, 3, n, t, 3)
     end_time = time.time()
-    print(p.dtype)
-    p_mat = np.transpose(p_mat)
-
-    p_norm = np.linalg.norm(p - p_mat) 
-    p_mat_norm = np.linalg.norm(p_mat)
-    u_norm = np.linalg.norm(u)
-
-    print(p_norm)
-    print(p_mat_norm)
-    print(p_norm / p_mat_norm)
+    
 
 
     print(f"Execution time: {end_time - start_time} seconds")
