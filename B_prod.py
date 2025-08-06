@@ -5,7 +5,9 @@ import sys
 import scipy.io
 
 
-
+"""
+The funciton B_prod computes the product of a vector u with a tensor defined by the entries of a 3D structure.
+"""
 
 
 def B_prod(u,entry_ind,n,t,gpu_extended_memory):
