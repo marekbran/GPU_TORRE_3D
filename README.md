@@ -2,8 +2,6 @@
 
 This repository contains a simplified version of a [GPU-TORRE-3D](https://github.com/sampsapursiainen/GPU-Torre-3D/tree/main) MATLAB package written in Python. Included is a simplified version of compute_data_gpu, which handles the main logic, and 7 helper functions.
 
-
-
 ## Overview
 
 This repository implements a simplified, Python-based version of the GPU-TORRE-3D electromagnetic simulation package. The code is designed to run matrix and vector operations on the GPU (using PyOpenCL) for efficiency and is structured around several main computational routines. The following comments and explanations describe the purpose and main logic of each file and important code blocks.
