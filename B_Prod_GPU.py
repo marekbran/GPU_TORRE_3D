@@ -101,6 +101,7 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
 if __name__ == "__main__":
     mat_data = scipy.io.loadmat('GPU_TORRE_3D\B_prod.mat')
     device = torch.device("cuda")
+    
     n = mat_data['n_array_cpu']
     n = torch.from_numpy(n)
     n = n.to(device)

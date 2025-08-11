@@ -4,7 +4,7 @@ import time
 from boundary_point_source import boundary_point_source
 import scipy.io
 from pulse_window_function import pulse_window_function
-from B_T_prod import B_T_prod
+from GPU_TORRE_3D.B_T_prod_GPU import B_T_prod
 from B_prod import B_prod
 from pcg_iteration_gpu import pcg_iteration_gpu
 #from five_largest import five_largest
