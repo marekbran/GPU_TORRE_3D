@@ -6,7 +6,7 @@ import scipy.io
 from pulse_window_function import pulse_window_function
 from GPU_TORRE_3D.B_T_prod_GPU import B_T_prod
 from B_prod import B_prod
-from pcg_iteration_gpu import pcg_iteration_gpu
+from GPU_TORRE_3D.pcg_iteration import pcg_iteration_gpu
 #from five_largest import five_largest
 from GPU_TORRE_3D.one_loop_smaller import one_loop
 import math
