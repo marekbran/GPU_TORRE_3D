@@ -46,13 +46,6 @@ def one_loop(d_t, s_orbit, k, boundary_vec_1, boundary_vec_2, div_vec, p_1, p_2,
 
 
 
-
-
-
-
-    
-
-
     aux_vec_init = pcg_iteration_gpu(C,aux_vec,1e-5,1000,M,aux_vec_init,gpu_extended_memory)
 
     test_aux_vec_init = aux_vec_init
