@@ -6,6 +6,9 @@ __pycache__/
 # mat files
 *.mat
 
+
+test.py
+
 # C extensions
 *.so
 

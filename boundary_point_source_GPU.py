@@ -20,7 +20,7 @@ def boundary_point_source(source_points, orbit_triangles, orbit_nodes):
 
     return (boundary_vec_1, boundary_vec_2)
 
-
+"""
 
 if __name__ == "__main__":
     mat_data = scipy.io.loadmat(r"GPU_TORRE_3D\bounndary_point_source.mat")
@@ -43,3 +43,5 @@ if __name__ == "__main__":
     end_time = time.time()
 
     print(f"Execution time: {end_time - start_time:.4f} seconds")
+    
+"""

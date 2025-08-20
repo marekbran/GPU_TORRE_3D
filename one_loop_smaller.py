@@ -4,9 +4,9 @@ import time
 from boundary_point_source import boundary_point_source
 import scipy.io
 from pulse_window_function import pulse_window_function
-from GPU_TORRE_3D.B_T_prod_GPU import B_T_prod
+from B_T_prod_GPU import B_T_prod_GPU
 from B_prod import B_prod
-from GPU_TORRE_3D.pcg_iteration import pcg_iteration_gpu
+from pcg_iteration import pcg_iteration_gpu
 #from five_largest import five_largest
 
 
@@ -35,7 +35,7 @@ def one_loop(d_t, s_orbit, k, boundary_vec_1, boundary_vec_2, div_vec, p_1, p_2,
 
     test_mat_vec = R * u
 
-    aux_vec = -B_T_prod(p_1, p_2, p_3, div_vec, n_array, t_array, gpu_extended_memory)
+    aux_vec = -B_T_prod_GPU(p_1, p_2, p_3, div_vec, n_array, t_array, gpu_extended_memory)
     aux_vec -=  test_mat_vec
 
     
@@ -62,7 +62,7 @@ def one_loop(d_t, s_orbit, k, boundary_vec_1, boundary_vec_2, div_vec, p_1, p_2,
 
 
 
-    p_aux = B_prod(u, 1, n_array, t_array, gpu_extended_memory).astype(np.float32)
+    p_aux = B_prod(u, 1, n_array, t_array, gpu_extended_memory)
 
 
     aux_vec = (A * p_aux).T

@@ -12,6 +12,9 @@ def pcg_iteration_gpu(A,b,tol_val,max_it,M,x,gpu_extended_memory):
     z = M *r
     p = z
     j = 1
+    
+    
+
 
 
 
@@ -36,7 +39,6 @@ def pcg_iteration_gpu(A,b,tol_val,max_it,M,x,gpu_extended_memory):
     return x
 
 
-
 if __name__ == "__main__":
 
     mat_data = scipy.io.loadmat('GPU_TORRE_3D/pcg_iteration_gpu.mat')
@@ -58,8 +60,8 @@ if __name__ == "__main__":
     
   # Initialize x as a zero vector
     x = torch.zeros(b.shape, dtype=torch.double, device=device) # Initialize x as a zero vector
-    tol_val =1e-15
-    max_it = 100000
+    tol_val =1e-5
+    max_it = 1000
     conv_val = mat_data['conv_val_cpu']
     n_iter = mat_data['n_iter']
 
@@ -69,5 +71,5 @@ if __name__ == "__main__":
     
     
     print(f"Execution time: {end_time - start_time} seconds")
- 
-    
+
+  

@@ -1,5 +1,6 @@
 import pyopencl as cl
 import numpy as np
+import gc
 import time
 import sys
 import scipy.io
@@ -44,6 +45,8 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
 
             aux_vec = v1[:, 0] * v2[:, 1]
             aux_vec = aux_vec - v1[:, 1] * v2[:, 0]
+            
+            
 
 
             for k in range(3):
@@ -92,7 +95,7 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
         print(f"Python Error: {status_message}", file=sys.stderr) # Print to stderr for MATLAB
 
 
-
+"""
 
 
 if __name__ == "__main__":
@@ -118,3 +121,4 @@ if __name__ == "__main__":
 
 
     print(f"Execution time: {end_time - start_time} seconds")
+"""
