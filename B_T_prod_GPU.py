@@ -10,7 +10,7 @@ import torch
 
 
 def B_T_prod_GPU(p_1, p_2, p_3, div_vec, n, t, gpu_extended_memory):
-    
+    start_time = time.time()
     device = torch.device("cuda")
 
 
@@ -115,6 +115,8 @@ def B_T_prod_GPU(p_1, p_2, p_3, div_vec, n, t, gpu_extended_memory):
                          
 
     div_u = div_u / 6
+    end_time = time.time()
+    print(f"Execution time: {end_time - start_time} seconds")
     
     return div_u
 
@@ -155,9 +157,9 @@ if __name__ == "__main__":
 
     A = mat_data['A_cpu']
 
-    start_time = time.time()
+    
     p = B_T_prod_GPU(p_1, p_2, p_3, div_vec, n, t, 3)
-    end_time = time.time()
+    
     
     
     p = p.cpu().numpy()
@@ -174,5 +176,5 @@ if __name__ == "__main__":
     
 
 
-    print(f"Execution time: {end_time - start_time} seconds")
+    
 

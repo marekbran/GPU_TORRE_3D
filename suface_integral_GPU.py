@@ -17,7 +17,7 @@ def surface_integral(u_data, du_dt_data, p_1_data, p_2_data, p_3_data, t_data, t
     n_triangles = orbit_triangles.shape[0]
 
 
-
+    orbit_triangles = orbit_triangles.to(torch.long)
     t_c_points = (1/3)*(orbit_nodes[orbit_triangles[:,0], :] + orbit_nodes[orbit_triangles[:,1], :] + orbit_nodes[orbit_triangles[:,2], :])
     s_vec = torch.zeros((n_triangles, n_source_points)).to(device)
     scaling_vec_2 = torch.zeros((n_triangles, n_source_points))
@@ -41,8 +41,8 @@ def surface_integral(u_data, du_dt_data, p_1_data, p_2_data, p_3_data, t_data, t
         scaling_vec_2[:,i] = torch.sum(source_vec*n_vec_aux, dim=1)
     
     
-    #d_t_2 = t_data(1) - t_data(0); 
-    d_t_2 = 2
+    print(t_data.shape, t_data)
+    d_t_2 = t_data[1] - t_data[0]
     ret_time = torch.floor((s_vec-t_shift)/d_t_2)
 
 
@@ -65,8 +65,7 @@ def surface_integral(u_data, du_dt_data, p_1_data, p_2_data, p_3_data, t_data, t
     ind_aux_1 = torch.arange(0, n_source_points, device=device)
     ind_aux_1 = ind_aux_1.unsqueeze(0).expand(n_triangles, -1)
 
-    #for t_ind in range(0,u_data.shape[1]):
-    for t_ind in range(0,3):
+    for t_ind in range(0,u_data.shape[1]):
         aux_vec_1 =  -ala_vec[:]*u_data[:, t_ind]
         aux_vec_1 = scaling_vec_2 * aux_vec_1.unsqueeze(-1) / (s_vec**2)
         aux_vec_2 =  -ala_vec[:]*du_dt_data[:, t_ind]
@@ -101,7 +100,7 @@ def surface_integral(u_data, du_dt_data, p_1_data, p_2_data, p_3_data, t_data, t
     test = integ_vec
     
 
-    return integ_vec[:,0:t_data.shape[1]], test
+    return integ_vec[:,0:t_data.shape[0]], test
 
 
 if __name__ == "__main__":
