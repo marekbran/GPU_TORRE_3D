@@ -1,4 +1,3 @@
-import pyopencl as cl
 import numpy as np
 import gc
 import time
@@ -29,24 +28,27 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
         entry_ind_vec =  torch.tensor([0, 1])
     else:
         raise ValueError("Invalid entry_ind value")
-    
+
     u = u / 6
     entry_ind_vec = entry_ind_vec.to(device)
-    
+
     p_1 = torch.zeros((u.shape[0], 1)).to(device)
     p_2 = torch.zeros((u.shape[0], 1)).to(device)
     p_3 = torch.zeros((u.shape[0], 1)).to(device)
 
 
     for i in range(4):
-        row_indices = t[:, v_ind[i, 1]]  #parallelise -1
+        row_indices = t[:, v_ind[i, 1]]
+        row_indices = row_indices.to(torch.long)
         aux_vec = n[row_indices[:, None], entry_ind_vec]
 
-        row_indices = t[:, v_ind[i, 3]] 
+        row_indices = t[:, v_ind[i, 3]]
+        row_indices = row_indices.to(torch.long)
         v1= n[row_indices[:, None], entry_ind_vec]
         v1 = v1 - aux_vec
 
-        row_indices = t[:, v_ind[i, 2]] 
+        row_indices = t[:, v_ind[i, 2]]
+        row_indices = row_indices.to(torch.long)
         v2= n[row_indices[:, None], entry_ind_vec]
         v2 = v2 - aux_vec
 
@@ -55,21 +57,22 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
 
 
 
-        
+
         for k in range(3):
-            row_indices = t[:, i] 
+            row_indices = t[:, i]
+            row_indices = row_indices.to(torch.long)
             u_perm = u[row_indices, k]
 
 
 
-            if i == 0: 
+            if i == 0:
                 if k == 0:
                     p_1 = u_perm * aux_vec
                 elif k == 1:
                     p_2 = u_perm * aux_vec
                 elif k == 2:
                     p_3 = u_perm * aux_vec
-            
+
 
             else:
                 if k == 0:
@@ -78,57 +81,57 @@ def B_prod(u,entry_ind,n,t,gpu_extended_memory):
                     p_2 = p_2 + u_perm * aux_vec
                 elif k == 2:
                     p_3 = p_3 + u_perm * aux_vec
-      
-            
+
+
     if gpu_extended_memory == 0 or gpu_extended_memory == 1:
         p = torch.zeros((n.shape[0], 3))
         p[:, 0] = p_1
-        p[:, 1] = p_2            
+        p[:, 1] = p_2
         p[:, 2] = p_3
     else:
         p = torch.stack([p_1, p_2, p_3])
 
-    
 
-   
+
+
     del p_1, p_2, p_3
 
-   
-    return p  
-    
+
+    return p
+
 
 
 if __name__ == "__main__":
     mat_data = scipy.io.loadmat('GPU_TORRE_3D\B_prod.mat')
     device = torch.device("cuda")
-    
+
     n = mat_data['n_array_cpu']
     n = torch.from_numpy(n)
     n = n.to(device)
-    
-    
+
+
     u = mat_data['u']
     u = u.astype(np.float32)
     u = torch.from_numpy(u)
     u = u.to(device)
-    
-    
+
+
     t = mat_data['t_array_cpu']
     t = torch.from_numpy(t)
     t = t.to(device)
     t = t-1
-    
-    
+
+
     p_mat = mat_data['p_cpu']
 
 
 
 
-    
+
     p = B_prod(u, 3, n, t, 3, device)
     p = p.cpu().numpy()  # Move to CPU and convert to numpy array
-    
-    
+
+
 
     p = p.T
     p_norm = np.linalg.norm(p - p_mat)
@@ -138,7 +141,3 @@ if __name__ == "__main__":
     print(f"p_mat_norm: {p_mat_norm}")
     print(f"p_only_norm: {p_only_norm}")
     print(p_norm / p_mat_norm)
-
-
-
-   
